@@ -1,16 +1,7 @@
 <?php
-$title = 'Home | ';
-    // if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
-$conn = mysqli_connect('localhost','root','saadox+12345','location_de_voitures_db');
-// if(!$conn){
-//     die("Connection failed: ".mysqli_connect_error());
-// }else{
 
-//     echo "Connected successfully";
-// }
-        // if(isset($_POST['name']) && isset($_POST['name'])&& isset($_POST['name']))
-    // }  
-    
+$title = 'Car Rental Managment | ';
+
 
 ?>
 
@@ -25,7 +16,6 @@ $conn = mysqli_connect('localhost','root','saadox+12345','location_de_voitures_d
     <link rel="shortcut icon" href="srcs/imgs/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <title><?php echo $title ?></title>
-    
 </head>
 
 <body>
@@ -34,32 +24,39 @@ $conn = mysqli_connect('localhost','root','saadox+12345','location_de_voitures_d
             <a href="index.html"><img src="srcs/imgs/logo.png" alt="Rent a Car"></a>
 
             <div class="menu">
-                <ul>
+                <!-- <ul>
                     <li><a href="index.php">Home</a></li>
-                    <!-- <li><a href="about.php">About</a></li>
-                    <li><a href="services.php">Services</a></li> -->
+                     <li><a href="about.php">About</a></li>
+                    <li><a href="services.php">Services</a></li>
                     <li><a href="contact.php">Contact</a></li>
-                </ul>
+                </ul> -->
                 <div class="user">
-                    <a href="login.php"><i class="fa-solid fa-user login"></i>Login</a>
-                    <a href="signup.php"><i class="fa-solid fa-user-plus sign-up"></i>Sign up</a>
+                    <a href="index.php"><i class="fa-solid fa-user login"></i>Log out</a>
+                    <!-- <a href="signup.php"><i class="fa-solid fa-user-plus sign-up"></i>Sign up</a> -->
                 </div>
             </div>
         </nav>
     </header>
     <main>
         <section>
-            <div class="hero-section">
+                <div class="left-bar">
+                    <ul>
+                        <li><button>Contracts</button></li>
+                        <li><button>Client</button></li>
+                        <li><button>Cars</button></li>
+                    </ul>
 
-                <div class="info">
-                    <h1>Welcome to a Car Rental Management</h1>
-                    <p>Manage your Rentals Contracts Easly.</p> 
-                    <a href="login.php" class="btn">Manage Now!</a>
                 </div>
-                <div>
-                    <img src="srcs/imgs/Hyundai_Tucson.png" alt="Hero image">
+                <div class="right-bar">
+                    <div>
+                        <input type="text" id="search" placeholder="Search..">
+                        <input type="button" value="Add a Contract">
+                    </div>
+                    <div class="Info">
+                        
+
+                    </div>
                 </div>
-            </div>
         </section>
     </main>
     <footer>
