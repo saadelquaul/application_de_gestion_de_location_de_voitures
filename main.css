@@ -356,11 +356,9 @@ main {
 
 
 .right-bar {
-    position: relative;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    align-items: space-between;
     float: right;
     width: 70%;
     min-height: 300px;
@@ -371,12 +369,10 @@ main {
     transform: translateY(40px);
 
     div:first-of-type {
-        position: absolute;
-        top: 10px;
-        /* left: 10px; */
         width: 100%;
-        display: flex;
+        display: flex;  
         justify-content: space-around;
+        
 
         [type="button"] {
             padding: 7px 15px;
@@ -405,4 +401,71 @@ main {
 
         }
     }
+    .Info {
+        margin-top: 20px;
+        width: 100%;
+        height: 300px;
+        display: flex;
+        overflow-y: auto;
+        row-gap: 10px;
+        padding: 10px;
+        flex-direction: column;
+
+         .contractInfo {
+
+            width: 100%;
+            padding: 10px;
+            border-bottom: 1px solid #ccc;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            
+            div {
+                width: 40px;
+                display: flex;
+                flex-direction: column;
+                row-gap: 4px;
+                        }
+            h3 {
+                font-size: 20px;
+                margin: 0;
+            }
+            p {
+                font-size: 16px;
+                margin: 0;
+            }
+
+            button {
+                padding: 5px 7px;
+                border: none;
+                border-radius: 4px;
+                background-color: #1F4064;
+                color: white;
+                font-size: large;
+                cursor: pointer;
+                
+                &:hover {
+                    background-color: #4cc52b;
+                    color: white;
+                    transition: background-color 0.3s ease-in-out;
+                }
+            }
+            hr {
+                margin: 10px 0;
+            }
+            border-radius: 10px;
+            box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
+            span {
+                font-size: 14px;
+                color: gray;
+                display: block; 
+                text-align: center; 
+            }
+
+
+        }
+    }
 }
+.hidden {
+visibility: hidden;
+ }

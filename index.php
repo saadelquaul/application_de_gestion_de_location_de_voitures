@@ -1,16 +1,7 @@
 <?php
 $title = 'Home | ';
-    // if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
-$conn = mysqli_connect('localhost','root','saadox+12345','location_de_voitures_db');
-// if(!$conn){
-//     die("Connection failed: ".mysqli_connect_error());
-// }else{
+include('connect.php');
 
-//     echo "Connected successfully";
-// }
-        // if(isset($_POST['name']) && isset($_POST['name'])&& isset($_POST['name']))
-    // }  
-    
 
 ?>
 
