@@ -38,29 +38,29 @@ include('./config.php');
     </header>
     <main>
         <section>
-                <div class="left-bar">
-                    <ul>
-                        <li><button>Contracts</button></li>
-                        <li><button>Client</button></li>
-                        <li><button>Cars</button></li>
-                    </ul>
+            <div class="left-bar">
+                <ul>
+                    <li><button>Contracts</button></li>
+                    <li><button>Client</button></li>
+                    <li><button>Cars</button></li>
+                </ul>
 
+            </div>
+            <div class="right-bar">
+                <div>
+                    <input type="text" id="search" placeholder="Search..">
+                    <input type="button" value="Add a Contract">
                 </div>
-                <div class="right-bar">
-                    <div>
-                        <input type="text" id="search" placeholder="Search..">
-                        <input type="button" value="Add a Contract">
-                    </div>
-                    <div class="Info hidden">
-                        
-                        <?php
-                        $contracts = $conn->query("SELECT * FROM contracts");
+                <div class="Info hidden">
 
-                        if ($contracts->num_rows > 0) {
-                            while ($row = $contracts->fetch_assoc()) {
+                    <?php
+                    $contracts = $conn->query("SELECT * FROM contracts");
 
-                            echo "<div class='contractInfo'>".
-                            "<h3>Contract: <span>'{$row["ContractNumber"]}'</span></h3>";
+                    if ($contracts->num_rows > 0) {
+                        while ($row = $contracts->fetch_assoc()) {
+
+                            echo "<div class='contractInfo'>" .
+                                "<h3>Contract: <span>'{$row["ContractNumber"]}'</span></h3>";
                             echo "<p>Duration: <span>'{$row["Duration"]}' Day(s) </span></p>";
                             echo "<p>Client: <span>'{$conn->query("SELECT firstName FROM clients where ClientID = {$row['ClientID']}")->fetch_object()->firstName}'</span> </p>";
                             echo "<p>Car: <span>'{$conn->query("SELECT Model FROM cars where RegistrationNumber = '{$row['RegistrationNumber']}'")->fetch_object()->Model}'</span></p>";
@@ -68,16 +68,138 @@ include('./config.php');
                             echo "<p>End Date: <span>'{$row['EndDate']}'</span></p>";
                             echo "<p>Total Price: <span>'$ {$row['Duration']} '</span></p>";
                             echo "<div>";
-                            echo "<button><i class='fa-solid fa-trash'></i></button>".
-                                "<button><i class='fa-regular fa-pen-to-square'></i></button>".
-                            "</div> </div>";
-                            }
-                           } else {
-                            echo "No Contracts found.";
-                           }
-                            ?>
-                    </div>
+                            echo "<button><i class='fa-solid fa-trash'></i></button>" .
+                                "<button><i class='fa-regular fa-pen-to-square'></i></button>" .
+                                "</div> </div>";
+                        }
+                    } else {
+                        echo "No Contracts found.";
+                    }
+                    ?>
                 </div>
+            </div>
+            <div class="addContract">
+                <form method="post" id="addContract" action="createData.php">
+                <h2>Add a New Contract</h2>
+                <input type="text" id="contractNumber" placeholder="Contract Number">
+                <label for="startDate">Start Date:</label>
+                <input type="date" id="startDate">
+                <label for="endDate">End Date:</label>
+                <input type="date" id="endDate">
+                <select id="clientID">
+                    <?php
+                    $clients = $conn->query("SELECT * FROM clients");
+                    while ($row = $clients->fetch_assoc()) {
+                        echo "<option value='{$row["ClientID"]}' style='background-color:aliceblue;color:black;'>{$row["firstName"]} {$row["lastName"]}</option>";
+                    }
+                    echo "<option value='addClient' style='background-color:darkorange;color:white; text-align:center;font-weight:bold;''>Add a New Client</option>";
+                    
+
+                    ?>
+                </select>
+                <select id="registrationNumber">
+                    <?php
+                    $cars = $conn->query("SELECT * FROM cars");
+
+                    while ($row = $cars->fetch_assoc()) {
+                        echo "<option value='{$row["RegistrationNumber"]}'>{$row["Model"]}</option>";
+                    }
+                    echo "<option value='addCar' style='background-color:darkorange;color:white;font-weight:bold;text-align:center;'>Add a New Car</option>";
+                    ?>
+                </select>
+
+                <input type="submit" value="Add Contract">
+                
+                <div class="success hidden">
+                    Contract added successfully.
+
+                    <button class="close-btn">Close</button>
+                </div>
+                <div class="error hidden">
+                    Error. Please try again later.
+                    <button class="close-btn">Close</button>
+                </div>
+                </form>
+                </div>
+                <div class="addClient"  style="display: none;">
+                    <form method="post" id="addClient" action="createData.php" >
+                        <h2>Add a New Client</h2>
+                        <input type="text" id="firstName" placeholder="First Name">
+                        <input type="text" id="lastName" placeholder="Last Name">
+                        <input type="tel" id="tel" placeholder="Phone Number">
+                        <input type="text" id="address" placeholder="Adresse">
+                        <input type="submit" value="Add Client">
+                       
+                    </form>
+                    <div class="success hidden">
+                            Client added successfully.
+                            <button class="close-btn">Close</button>
+                            </div>
+                            <div class="error hidden">
+                                Error. Please try again later.
+                            <button class="close-btn">Close</button>
+                </div>
+                </div>
+                <div class="addCar" style="display: none;">
+                    <form method="post" id="addCar" action="createData.php" >
+                        <h2>Add a New Car</h2>
+                        <input type="text" id="registrationNumber" placeholder="Registration Number">
+                        <input type="text" id="model" placeholder="Model">
+                        <input type="text" id="year" placeholder="Year">
+                        <input type="submit" value="Add Car">
+                        
+                    </form>
+                    <div class="success hidden">
+                            Car added successfully.
+                            <button class="close-btn">Close</button>
+                            </div>
+                            <div class="error hidden">
+                                Error. Please try again later.
+                            <button class="close-btn">Close</button>
+                </div>
+                </div>
+                    
+
+                    <script>
+                        // Add your JavaScript code here
+                        // Example:
+                        // document.querySelector('.close-btn').addEventListener('click', function() {
+                        //     document.querySelector('.error').classList.add('hidden');
+                        // });
+                        // document.querySelector('.show-error-btn').addEventListener('click', function() {
+                        //     document.querySelector('.error').classList.remove('hidden');
+                        // });
+                        // document.querySelector('.show-details-btn').addEventListener('click', function() {
+                        //     document.querySelector('.details-container').classList.remove('hidden');
+                        // });
+                        // document.querySelector('.close-details-btn').addEventListener('click', function() {
+                        //     document.querySelector('.details-container').classList.add('hidden');
+                        // });
+                        // document.querySelector('.error-msg').addEventListener('click', function() {
+                        //     document.querySelector('.error-details').classList.remove('hidden');
+                        // });
+                        // document.querySelector('.close-error-btn').addEventListener('click', function() {
+                        //     document.querySelector('.error-details').classList.add('hidden');
+                        // });
+                        // document.querySelector('.error-msg').addEventListener('mouseover', function() {
+                        //     document.querySelector('.error-details').classList.remove('hidden');
+                        // });
+                        // document.querySelector('.error-msg').addEventListener('mouseout', function() {
+                        //     document.querySelector('.error-details').classList.add('hidden');
+                        // });
+                        // document.querySelector('.show-error-btn').addEventListener('mouseover', function() {
+                        //     document.querySelector('.error').classList.remove('hidden');
+                        // });
+                        // document.querySelector('.show-error-btn').addEventListener('mouseout', function() {
+                        //     document.querySelector('.error').classList.add('hidden');
+                        // });
+                    </script>
+
+
+                </div>
+
+
+            </div>
         </section>
     </main>
     <footer>
